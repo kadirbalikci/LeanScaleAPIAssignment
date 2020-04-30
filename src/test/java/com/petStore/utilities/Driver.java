@@ -1,4 +1,4 @@
-package com.bookit.utilities;
+package com.petStore.utilities;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;

@@ -1,10 +1,10 @@
-package com.bookit.pages;
+package com.petStore.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.bookit.utilities.Driver;
+import com.petStore.utilities.Driver;
 
 public class SelfPage extends TopNavigationBar{
 	public SelfPage() {

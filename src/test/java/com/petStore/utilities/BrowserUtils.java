@@ -1,4 +1,4 @@
-package com.bookit.utilities;
+package com.petStore.utilities;
 
 import org.junit.Assert;
 import org.openqa.selenium.*;

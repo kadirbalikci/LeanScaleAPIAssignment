@@ -1,4 +1,4 @@
-package com.bookit.utilities;
+package com.petStore.utilities;
 
 import java.io.FileInputStream;
 import java.util.Properties;

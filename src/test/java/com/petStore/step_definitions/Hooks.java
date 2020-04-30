@@ -1,37 +1,26 @@
-package com.bookit.step_definitions;
+package com.petStore.step_definitions;
 
 import java.util.concurrent.TimeUnit;
 
 
+import com.petStore.utilities.ConfigurationReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import com.bookit.utilities.DBUtils;
-import com.bookit.utilities.Driver;
+import com.petStore.utilities.Driver;
 
 import cucumber.api.Scenario;
 
 
 public class Hooks {
 
-	@Before("@db")
-	public void dbHook() {
-		System.out.println("creating database connection");
-		DBUtils.createConnection();
 
-	}
-	
-	@After("@db")
-	public void afterDbHook() {
-		System.out.println("closing database connection");
-		DBUtils.destroyConnection();
-
-	}
-	
 	@Before
 	public void setUp() {
+		RestAssured.baseURI = ConfigurationReader.get("url");
 		// we put a logic that should apply to every scenario
 		Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}

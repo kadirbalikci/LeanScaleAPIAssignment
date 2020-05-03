@@ -61,7 +61,7 @@ public class ApiStepDefs {
     public void user_makes_Post_request_to_create_a_new_order_with_valid_values() {
        Map<String,Object> requestMap = new HashMap<>();
         //adding the values that we want to post
-        requestMap.put("id", 3);
+        requestMap.put("id", 4);
         requestMap.put("petID",0);
         requestMap.put("quantity", 1);
         requestMap.put("shipDate","2020-04-30T12:59:31.682Z");
@@ -82,7 +82,7 @@ public class ApiStepDefs {
         int quantity = response.path("quantity");
        // int petID = response.path("petID");
 
-        assertEquals(3, id);
+        assertEquals(4, id);
         assertEquals(1, quantity);
       //  assertEquals(0, petID);
     }

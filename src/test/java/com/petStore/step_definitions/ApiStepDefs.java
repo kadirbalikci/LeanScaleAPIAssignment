@@ -1,24 +1,18 @@
 package com.petStore.step_definitions;
 
-import com.petStore.pages.SelfPage;
-import com.petStore.utilities.ConfigurationReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static io.restassured.RestAssured.*;
 
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.*;
 import static org.junit.Assert.*;
 
 public class ApiStepDefs {

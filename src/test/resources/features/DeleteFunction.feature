@@ -6,7 +6,7 @@ Feature: Delete Function Positive and Negative Test Case
     When User gets delete message
     Then status code should be 200
 
-  @wip
+
   Scenario: verify NOT getting any response with invalid values
     Given User makes Delete request with invalid order id
     When User gets not found error message

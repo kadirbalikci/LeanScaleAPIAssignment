@@ -1,16 +1,16 @@
-package com.petStore.step_definitions;
+package com.LeanScale.step_definitions;
 
 import java.util.concurrent.TimeUnit;
 
 
-import com.petStore.utilities.ConfigurationReader;
+import com.LeanScale.utilities.ConfigurationReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import com.petStore.utilities.Driver;
+import com.LeanScale.utilities.Driver;
 
 import cucumber.api.Scenario;
 

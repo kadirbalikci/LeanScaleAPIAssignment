@@ -1,6 +1,6 @@
 Feature: Create/Post Function Positive and Negative Test Cases
 
-  @wip
+
   Scenario: verify getting right item with valid values
     Given User makes Post request to create a new order with valid values
     When User gets relevant message

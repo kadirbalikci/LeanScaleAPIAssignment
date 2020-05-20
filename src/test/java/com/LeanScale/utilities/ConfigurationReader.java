@@ -1,4 +1,4 @@
-package com.petStore.utilities;
+package com.LeanScale.utilities;
 
 import java.io.FileInputStream;
 import java.util.Properties;

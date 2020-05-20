@@ -1,4 +1,4 @@
-package com.petStore.utilities;
+package com.LeanScale.utilities;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;

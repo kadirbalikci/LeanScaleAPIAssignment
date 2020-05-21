@@ -21,7 +21,6 @@ Feature: Read/Get Function Positive and Negative Test Cases
       | 29 |
       | 37 |
 
-
   Scenario: verify NOT getting any response with invalid data
     Given User makes get request with wrong ID value
     When User doesn't get any response data

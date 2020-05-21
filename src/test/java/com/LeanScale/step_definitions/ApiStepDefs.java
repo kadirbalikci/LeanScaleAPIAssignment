@@ -18,15 +18,12 @@ public class ApiStepDefs {
     Response response;
     ArrayList <String> categoryNameList = null;
 
-
-
     @Given("User makes get request to see the Categories")
     public void user_makes_get_request_to_see_the_Categories() {
         String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
         response =  given().header("Authorization", accessToken)
                 .and().accept(ContentType.JSON)
                 .when().get("V1/categories");
-
     }
 
     @When("User gets the relevant data")
@@ -48,7 +45,7 @@ public class ApiStepDefs {
 
     @Then("Verify status code {int} and content type")
     public void verify_status_code_and_content_type(Integer int1) {
-        assertEquals(200, response.statusCode());
+        assertEquals(int1.intValue(), response.statusCode());
         assertEquals("application/json; charset=utf-8", response.contentType());
 
     }
@@ -64,182 +61,233 @@ public class ApiStepDefs {
 
     @When("User gets the data with the {int} successfully")
     public void user_gets_the_data_with_the_successfully(Integer categoryID) {
-
         assertEquals(categoryID, response.path("id"));
+    }
+
+    @Given("User makes get request with wrong ID value")
+    public void user_makes_get_request_with_wrong_ID_value() {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/"+500);
 
     }
 
-//    @Given("User makes request to read the pets By Status")
-//    public void user_makes_request_to_read_the_pets_By_Status() {
-//       response = given().accept(ContentType.JSON)
-//                .param("status", "sold")
-//                .when().get("pet/findByStatus");
-//    }
-//
-//    @When("User gets the relevant data")
-//    public void user_gets_the_relevant_data() {
-//
-//        ArrayList <String> statusList = response.path("status");
-//
-//        System.out.println("status List = " + statusList);
-//        for (int i = 0; i <statusList.size(); i++) {
-//            assertEquals("sold", statusList.get(i));
-//        }
-//    }
-//
-//    @Then("status code should be {int}")
-//    public void status_code_should_be(int int1) {
-//
-//        assertEquals(int1, response.statusCode());
-//    }
-//
-//    @Given("User makes get request with wrong ID value")
-//    public void user_makes_get_request_with_wrong_ID_value() {
-//        response = given().accept(ContentType.JSON)
-//                .when().get("pet/kkk");
-//    }
-//
-//    @When("User doesnt get any response data")
-//    public void user_doesnt_get_any_response_data() {
-//        System.out.println(" = " + response.prettyPrint());
-//        String errorMessage = response.path("message").toString();
-//        String expectedMessage = "java.lang.NumberFormatException: For input string: \"kkk\"";
-//
-//        assertEquals(expectedMessage, errorMessage);
-//    }
-//
-//    @Given("User makes Post request to create a new order with valid values")
-//    public void user_makes_Post_request_to_create_a_new_order_with_valid_values() {
-//       Map<String,Object> requestMap = new HashMap<>();
-//        //adding the values that we want to post
-//        requestMap.put("id", 4);
-//        requestMap.put("petID",0);
-//        requestMap.put("quantity", 1);
-//        requestMap.put("shipDate","2020-04-30T12:59:31.682Z");
-//        requestMap.put("status", "placed");
-//        requestMap.put("complete",true);
-//
-//        response = given().accept(ContentType.JSON).
-//                and().contentType(ContentType.JSON)
-//                .and().body(requestMap).when().post("store/order");
-//    }
-//
-//    @When("User gets relevant message")
-//    public void user_gets_relevant_message() {
-//        //verify response body
-//        System.out.println(" = " + response.prettyPrint());
-//
-//        int id = response.path("id");
-//        int quantity = response.path("quantity");
-//       // int petID = response.path("petID");
-//
-//        assertEquals(4, id);
-//        assertEquals(1, quantity);
-//      //  assertEquals(0, petID);
-//    }
-//
-//    @Given("User makes Post request with invalid values")
-//    public void user_makes_Post_request_with_invalid_values() {
-//
-//        Map<String,Object> requestMap = new HashMap<>();
-//        //adding the values that we want to post
-//        requestMap.put("id", 3);
-//        requestMap.put("petID",0);
-//        requestMap.put("quantity", 1);
-//        requestMap.put("shipDate","2020-04-30T12:59:31.682Z");
-//        requestMap.put("status", "placed");
-//        requestMap.put("complete","ok");
-//
-//        response = given().accept(ContentType.JSON).
-//                and().contentType(ContentType.JSON)
-//                .and().body(requestMap).when().post("store/order");
-//    }
-//
-//    @When("User gets error message")
-//    public void user_gets_error_message() {
-//
-//        String errorMessage = response.path("message").toString();
-//        String expectedMessage = "something bad happened";
-//        assertEquals(expectedMessage, errorMessage);
-//    }
-//
-//    @Given("User makes Delete request to remove an existing order with valid data")
-//    public void user_makes_Delete_request_to_remove_an_existing_order_with_valid_data() {
-//        response = given().contentType(ContentType.JSON)
-//                  .when().delete("store/order/4");
-//    }
-//
-//    @When("User gets delete message")
-//    public void user_gets_delete_message() {
-//        String actualMessage = response.path("message").toString();
-//        String expectedMessage = "4";
-//        assertEquals(expectedMessage, actualMessage);
-//    }
-//
-//    @Given("User makes Delete request with invalid order id")
-//    public void user_makes_Delete_request_with_invalid_order_id() {
-//        response = given().contentType(ContentType.JSON)
-//                .when().delete("store/order/5");
-//    }
-//    @When("User gets not found error message")
-//    public void user_gets_not_found_error_message() {
-//        String actualMessage = response.path("message").toString();
-//        String expectedMessage = "Order Not Found";
-//        assertEquals(expectedMessage, actualMessage);
-//    }
-//
-//    @Given("User makes Put request to update an order")
-//    public void user_makes_Put_request_to_update_an_order() {
-//        //user information before update
-////        {
-////            "id": 555,
-////                "username": "kadirbalikci1",
-////                "firstName": "Kadir",
-////                "lastName": "Balikcii",
-////                "email": "example@email.com",
-////                "password": "123abc",
-////                "phone": "123456789",
-////                "userStatus": 0
-////        }
-//        Map<String,Object> putMap = new HashMap<>();
-//        putMap.put("id",555);
-//        putMap.put("username","kadirbalikci1");
-//        putMap.put("firstName","nusret");
-//        putMap.put("lastName","harputlu");
-//        putMap.put("email","example@email.com");
-//        putMap.put("phone",6986436734L);
-//        putMap.put("userStatus",0);
-//
-//        response = given().accept(ContentType.JSON).
-//                and().contentType(ContentType.JSON)
-//                .and().body(putMap).when().put("user/kadirbalikci1");
-//    }
-//
-//    @When("User gets id in the message")
-//    public void user_gets_id_in_the_message() {
-//
-//        String actualMessage = response.path("message");
-//
-//        assertEquals("555", actualMessage);
-//        assertEquals("application/json", response.contentType());
-//    }
-//
-//    @Given("User makes Put request with invalid data")
-//    public void user_makes_Put_request_with_invalid_data() {
-//        Map<String,Object> putMap = new HashMap<>();
-//        putMap.put("id",555);
-//        putMap.put("username","kadirbalikci1");
-//        putMap.put("firstName","nusret");
-//        putMap.put("lastName","harputlu");
-//        putMap.put("email","example@email.com");
-//        putMap.put("phone",6986436734L);
-//        //userStatus must be a boolean, but I put a string to see the failure
-//        putMap.put("userStatus","ok");
-//
-//        response = given().accept(ContentType.JSON).
-//                and().contentType(ContentType.JSON)
-//                .and().body(putMap).when().put("user/kadirbalikci1");
-//    }
+    @When("User doesn't get any response data")
+    public void user_doesn_t_get_any_response_data() {
+        System.out.println(" = " + response.prettyPrint());
+        String expectedMessage = "No such entity with %fieldName = %fieldValue";
+        String actualMessage = response.path("message").toString();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Then("status code should be {int}")
+    public void status_code_should_be(Integer int1) {
+
+        assertEquals(int1.intValue(), response.statusCode());
+        assertEquals("application/json; charset=utf-8", response.contentType());
+    }
+    @Given("User makes get request to see What's New category details")
+    public void user_makes_get_request_to_see_What_s_New_category_details() {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/38");
+
+    }
+
+    @When("Correct data should ve displayed about the What's New category")
+    public void correct_data_should_ve_displayed_about_the_What_s_New_category() {
+        response.prettyPrint();
+
+    Integer expectedID =  38;
+    Integer expectedParentID = 2;
+    String expectedName = "What's New";
+    String expectedNumOfChildren = "0";
+
+        assertEquals(expectedID, response.path("id"));
+        assertEquals(expectedParentID, response.path("parent_id"));
+        assertEquals(expectedName, response.path("name"));
+        assertEquals(expectedNumOfChildren, response.path("custom_attributes[3].value"));
+
+    }
+
+    @Given("User makes get request to see Women category details")
+    public void user_makes_get_request_to_see_Women_category_details() {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/20");
+    }
+
+    @When("Correct data should ve displayed about the Women category")
+    public void correct_data_should_ve_displayed_about_the_Women_category() {
+        response.prettyPrint();
+
+        Integer expectedID =  20;
+        Integer expectedParentID = 2;
+        String expectedName = "Women";
+        String expectedNumOfChildren = "8";
+        String expectedChildrenIDs = "21,22";
+
+        assertEquals(expectedID, response.path("id"));
+        assertEquals(expectedParentID, response.path("parent_id"));
+        assertEquals(expectedName, response.path("name"));
+        assertEquals(expectedNumOfChildren, response.path("custom_attributes[4].value"));
+        assertEquals(expectedChildrenIDs, response.path("children"));
+
+    }
+
+    @Given("User makes get request to see {string} category details")
+    public void user_makes_get_request_to_see_category_details(String category) {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/11");
+    }
+
+    @When("Correct data should ve displayed about the {string} category")
+    public void correct_data_should_ve_displayed_about_the_category(String category) {
+        response.prettyPrint();
+
+        Integer expectedID =  11;
+        Integer expectedParentID = 2;
+        String expectedNumOfChildren = "8";
+        String expectedChildrenIDs = "12,13";
+
+        assertEquals(expectedID, response.path("id"));
+        assertEquals(expectedParentID, response.path("parent_id"));
+        assertEquals(category, response.path("name"));
+        assertEquals(expectedNumOfChildren, response.path("custom_attributes[4].value"));
+        assertEquals(expectedChildrenIDs, response.path("children"));
+    }
+
+    @Given("User makes get request to see Gear category details")
+    public void user_makes_get_request_to_see_Gear_category_details() {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/3");
+    }
+
+    @When("Correct data should ve displayed about the Gear category")
+    public void correct_data_should_ve_displayed_about_the_Gear_category() {
+        response.prettyPrint();
+
+        Integer expectedID =  3;
+        Integer expectedParentID = 2;
+        String expectedName = "Gear";
+        String expectedNumOfChildren = "3";
+        String expectedChildrenIDs = "4,5,6";
+
+        assertEquals(expectedID, response.path("id"));
+        assertEquals(expectedParentID, response.path("parent_id"));
+        assertEquals(expectedName, response.path("name"));
+        assertEquals(expectedNumOfChildren, response.path("custom_attributes[4].value"));
+        assertEquals(expectedChildrenIDs, response.path("children"));
+    }
+
+    @Given("User makes get request to see Training category details")
+    public void user_makes_get_request_to_see_Training_category_details() {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/9");
+    }
+
+    @When("Correct data should ve displayed about the Training category")
+    public void correct_data_should_ve_displayed_about_the_Training_category() {
+        response.prettyPrint();
+
+        Integer expectedID =  9;
+        Integer expectedParentID = 2;
+        String expectedName = "Training";
+        String expectedNumOfChildren = "1";
+        String expectedChildrenIDs = "10";
+
+        assertEquals(expectedID, response.path("id"));
+        assertEquals(expectedParentID, response.path("parent_id"));
+        assertEquals(expectedName, response.path("name"));
+        assertEquals(expectedNumOfChildren, response.path("custom_attributes[4].value"));
+        assertEquals(expectedChildrenIDs, response.path("children"));
+    }
+
+    @Given("User makes get request to see Collections category details")
+    public void user_makes_get_request_to_see_Collections_category_details() {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/7");
+
+    }
+
+    @When("Correct data should ve displayed about the Collections category")
+    public void correct_data_should_ve_displayed_about_the_Collections_category() {
+        response.prettyPrint();
+
+        Integer expectedID =  7;
+        Integer expectedParentID = 2;
+        String expectedName = "Collections";
+        String expectedNumOfChildren = "6";
+        String expectedChildrenIDs = "34,35,36,39,40,8";
+
+        assertEquals(expectedID, response.path("id"));
+        assertEquals(expectedParentID, response.path("parent_id"));
+        assertEquals(expectedName, response.path("name"));
+        assertEquals(expectedNumOfChildren, response.path("custom_attributes[3].value"));
+        assertEquals(expectedChildrenIDs, response.path("children"));
+    }
+
+    @Given("User makes get request to see Promotions category details")
+    public void user_makes_get_request_to_see_Promotions_category_details() {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/29");
+
+    }
+
+    @When("Correct data should ve displayed about the Promotions category")
+    public void correct_data_should_ve_displayed_about_the_Promotions_category() {
+        response.prettyPrint();
+
+        Integer expectedID = 29;
+        Integer expectedParentID = 2;
+        String expectedName = "Promotions";
+        String expectedNumOfChildren = "4";
+        String expectedChildrenIDs = "30,31,32,33";
+
+        assertEquals(expectedID, response.path("id"));
+        assertEquals(expectedParentID, response.path("parent_id"));
+        assertEquals(expectedName, response.path("name"));
+        assertEquals(expectedNumOfChildren, response.path("custom_attributes[3].value"));
+        assertEquals(expectedChildrenIDs, response.path("children"));
+
+    }
+
+    @Given("User makes get request to see Sale category details")
+    public void user_makes_get_request_to_see_Sale_category_details() {
+        String accessToken = "Bearer uulbfv3bozwp0wbvyax39o0348elq21f";
+        response =  given().header("Authorization", accessToken)
+                .and().accept(ContentType.JSON)
+                .when().get("V1/categories/37");
+    }
+
+    @When("Correct data should ve displayed about the Sale category")
+    public void correct_data_should_ve_displayed_about_the_Sale_category() {
+        response.prettyPrint();
+
+        Integer expectedID = 37;
+        Integer expectedParentID = 2;
+        String expectedName = "Sale";
+        String expectedNumOfChildren = "0";
+
+        assertEquals(expectedID, response.path("id"));
+        assertEquals(expectedParentID, response.path("parent_id"));
+        assertEquals(expectedName, response.path("name"));
+        assertEquals(expectedNumOfChildren, response.path("custom_attributes[3].value"));
+    }
 
 }
 

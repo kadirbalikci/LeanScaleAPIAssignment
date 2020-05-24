@@ -5,7 +5,7 @@ Feature: Read/Get Function Positive and Negative Test Cases
     When User gets the relevant data
     Then Verify status code 200 and content type
 
-
+  @wip
   Scenario Outline: verify category ID's with valid data
     Given User makes get request with the <ID> to see specific category
     When User gets the data with the <ID> successfully
@@ -66,7 +66,6 @@ Feature: Read/Get Function Positive and Negative Test Cases
     Given User makes get request to see Promotions category details
     When Correct data should ve displayed about the Promotions category
     Then Verify status code 200 and content type
-  @wip
   Scenario: Verifying values of Sale category
     Given User makes get request to see Sale category details
     When Correct data should ve displayed about the Sale category
